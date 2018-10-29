@@ -1,0 +1,81 @@
+Un sistema que enciena leds de la siguiente forma Despues de 20 segundos de encendido el sistema, prender led 1 por 10 segundos.
+  En 25 segundos de encendido el sistema, prender led 2 por 15 segundos. En 30 segundos de encendido el sistema, prender led 3 por 5 segundos.
+
+--------------------------------------------------
+Librerias
+#include LiquidCrystal.h
+#include TimerOne.h
+--------------------------------------------------
+Variables
+LiquidCrystal lcd(11, 10, 9, 8, 7, 6);
+int led1 = 5;
+int led2 = 4;
+int led3 = 3;
+int cont = 0;
+--------------------------------------------------
+void setup() {
+  Serial.begin(9600);Inicio CX Serial
+  lcd.begin(16, 2); Tamaño LCD
+  pinMode(led1, OUTPUT);Led como salida
+  pinMode(led2, OUTPUT);Led como salida
+  pinMode(led3, OUTPUT);Led como salida
+  Timer1.initialize(1000000);Tiempo para el medoto
+  Timer1.attachInterrupt(secuencia);Metodo paraa los leds
+}
+
+void loop() {
+  cont++;Contador que aumenta
+  lcd.clear();Limpia LCD
+  lcd.setCursor(0, 0);Ubicacion LCD
+  lcd.print(LED-ENCEN);Imprime en el LCD
+  lcd.setCursor(1, 1);Ubicacion LCD
+  lcd.print(CONTADOR);Imprime en el LCD
+  lcd.setCursor(10, 1);Ubicacion LCD
+  lcd.print(cont);Imprime en el LCD
+  secuencia();
+  if (cont == 45)Maximo del contador
+    cont = 0;Reinicia contador
+}
+--------------------------------------------------
+void secuencia() {Metodo de encendido de leds
+  if (cont = 20 && cont = 30){Ciclo para el led 1
+    digitalWrite(led1, HIGH);Led 1 encendido
+    lcd.setCursor(10, 0);Ubicacion LCD
+    lcd.print(1);Imprime en el LCD
+    delay(200);Tiempo retraso
+  }
+  else{
+    digitalWrite(led1, LOW);Led 1 apagado
+    lcd.setCursor(10, 0);Ubicacion LCD
+    lcd.print( );Imprime en el LCD
+    delay(200);Tiempo retraso
+  }
+  if (cont = 25 && cont = 40){Ciclo para el led 2
+    lcd.setCursor(11, 0);Ubicacion LCD
+    lcd.print(,);Imprime en el LCD
+    digitalWrite(led2, HIGH);Led 2 encendido
+    lcd.setCursor(12, 0);Ubicacion LCD
+    lcd.print(2);Imprime en el LCD
+    delay(300);Tiempo retraso
+    }
+  else{
+    digitalWrite(led2, LOW);Led 2 apagado
+    lcd.setCursor(12, 0);Ubicacion LCD
+    lcd.print( );Imprime en el LCD
+    delay(300);Tiempo retraso
+  }
+  if (cont = 30 && cont = 45){Ciclo para el led 2
+    lcd.setCursor(13, 0);Ubicacion LCD
+    lcd.print(,);Imprime en el LCD
+    digitalWrite(led3, HIGH);Led 2 encendido
+    lcd.setCursor(14, 0);Ubicacion LCD
+    lcd.print(3);Imprime en el LCD
+    delay(400);Tiempo retraso
+  }
+  else{
+    digitalWrite(led3, LOW);Led 3 apagado
+    lcd.setCursor(14, 0);Ubicacion LCD
+    lcd.print( );Imprime en el LCD
+    delay(400);Tiempo retraso
+  }
+}
