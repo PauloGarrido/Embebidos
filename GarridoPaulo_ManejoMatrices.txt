@@ -1,0 +1,175 @@
+/* Inicialice la matriz de tipo int y determine lo siguiente:
+   1.Encuentre el promedio de cada fila. 2. Encuentre el promedio de cada columna.
+   3. Encuentre el número más alto de cada fila. 4. Ecnuentre el número más bajo de cada columna
+   5. Encuentre el número más alto de toda la matriz. 6. Encuentre el número más bajo de toda la matriz. */
+//-------------------******-------------------
+//Variables
+int matriz_num [10][4] = //Matriz
+{ {3,  5, -6,  7}, {3,  8,  6, 17}, {2, -4,  4, 27}, {2,  4,  8, 10}, {2,  4, -2,  5},
+  {4,  5,  6,  7}, {5, -8,  6, -7}, {1,  5, 16,  8}, {0,  5, 12,  7}, {4,  5, 16,  7}};
+int i = 0; //Variable para la matriz fila
+int j = 0; //Variable para la matriz columna
+int cx = 0; //Para la cx serial
+int resul = 0; //Variable para la opcion 1 y 2
+int suma = 0; //Variable para la opcion 1 y 2
+int altofila = 0; //Variable para la opcion 3
+int bajocolum = 0; //Variable para la opcion 4
+int altomatriz = 0; //Variable para la opcion 5
+int bajomatriz = 0; //Variable para la opcion 6
+int opcion = 0; //Variable para los casos
+//-------------------******-------------------
+void setup() {
+  Serial.begin(9600); //Inicio CX Serial
+}
+
+void loop() {
+  if (cx == 0) { //Para que se repita el mensaje solo una vez
+    Serial.println("1. Encuentre el promedio de cada fila."); //Mensaje-Imprime en la CX Serial
+    Serial.println("2. Encuentre el promedio de cada columna."); //Mensaje-Imprime en la CX Serial
+    Serial.println("3. Encuentre el numero mas alto de cada fila."); //Mensaje-Imprime en la CX Serial
+    Serial.println("4. Ecnuentre el numero mas bajo de cada columna."); //Mensaje-Imprime en la CX Serial
+    Serial.println("5. Encuentre el numero mas alto de toda la matriz."); //Mensaje-Imprime en la CX Serial
+    Serial.println("6. Encuentre el numero mas bajo de toda la matriz."); //Mensaje-Imprime en la CX Serial
+    Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+  }
+  cx = 1; //Asigno un nuevo valor
+
+  if (Serial.available() > 0) { // verifico si hay dato disponible
+    opcion = Serial.read(); // almacenar el dato
+    switch (opcion) { //Seleccionar opciones
+      case '1': //Caso 1
+        prom_fila(); //Metodo de la opcion 1
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+      case '2': //Caso 2
+        prom_col(); //Metodo de la opcion 2
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+      case '3': //Caso 3
+        num_altofila(); //Metodo de la opcion 3
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break; 
+      case '4': //Caso 4
+        num_bajocol(); //Metodo de la opcion 4
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+      case '5': //Caso 5
+        num_altom(); //Metodo de la opcion 5
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+      case '6': //Caso 6
+        num_bajom(); //Metodo de la opcion 6
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+      default: //Caso Erroneo
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.println("OPCION INCORRECTA, INTENTE DE NUEVO"); //Mensaje-Imprime en la CX Serial
+        Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+        Serial.print("DIGITE LA OPCION:  "); //Mensaje-Imprime en la CX Serial
+        break;
+    }
+  }
+}
+//-----------------OPCION 1-------------------
+void prom_fila() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("El Promedio De C/Fila: "); //Mensaje-Imprime en la CX Serial
+  for (; i < 10; i++) { //Bucle para los datos de la fila matriz
+    for (; j < 4; j++) { //Bucle para los datos de la columna matriz
+      suma = suma + matriz_num[i][j]; //Suma los datos de la matriz
+      resul = suma / 4;  //Obtener promedio
+    }
+    Serial.println(resul); //Mensaje-Imprime el result en la CX Serial
+    suma = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    resul = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
+//-----------------OPCION 2-------------------
+void prom_col() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("El Promedio De C/Columnas: "); //Mensaje-Imprime en la CX Serial
+  for (; j < 4; j++) { //Bucle para los datos de la columna matriz
+    for (; i < 10; i++) { //Bucle para los datos de la fila matriz
+      suma = suma + matriz_num[i][j]; //Bucle para los datos de la columna matriz
+      resul = suma / 10; //Obtener promedio
+    }
+    Serial.println(resul); //Mensaje-Imprime el result en la CX Serial
+    suma = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    resul = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  
+  j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
+//-----------------OPCION 3-------------------
+void num_altofila() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("Numero Mayor De C/Fila: "); //Mensaje-Imprime en la CX Serial
+  for (; i < 10; i++) { //Bucle para los datos de la fila matriz
+    altofila == matriz_num[i][0]; //Iguala la matriz origianl al de la variable
+    for (; j < 3; j++) { //Bucle para los datos de la columna matriz
+      if (altofila < matriz_num[i][j + 1]) //Analiza posicion por posicion
+        altofila = matriz_num[i][j + 1]; //Analiza posicion por posicion
+    }
+    Serial.println(altofila); //Mensaje-Imprime el altofila en la CX Serial
+    altofila = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
+//-----------------OPCION 4-------------------
+void num_bajocol() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("Numero Bajo C/Columna: "); //Mensaje-Imprime en la CX Serial
+  for (; j < 4; j++) { //Bucle para los datos de la columna matriz
+    bajocolum == matriz_num[0][j]; //Iguala la matriz origianl al de la variable
+    for (; i < 9; i++) { //Bucle para los datos de la fila matriz
+      if (bajocolum > matriz_num[i + 1][j]) //Analiza posicion por posicion
+        bajocolum = matriz_num[i + 1][j]; //Analiza posicion por posicion
+    }
+    Serial.println(bajocolum); //Mensaje-Imprime el bajocolum en la CX Serial
+    bajocolum = 0; //Inicializa de nuevo la variable para no alterar el resultado
+    i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
+//-----------------OPCION 5-------------------
+void num_altom() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("Numero Mayor-Matriz: "); //Mensaje-Imprime en la CX Serial
+  altomatriz == matriz_num[0][0]; //Iguala la matriz origianl al de la variable
+  for (; i < 10; i++) { //Bucle para los datos de la fila matriz
+    for (; j < 3; j++) { //Bucle para los datos de la columna matriz
+      if (altomatriz < matriz_num[i][j + 1]) //Analiza posicion por posicion
+        altomatriz = matriz_num[i][j + 1]; //Analiza posicion por posicion
+    }
+    j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  Serial.println(altomatriz); //Mensaje-Imprime el altomatriz en la CX Serial
+  altomatriz = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
+//-----------------OPCION 6-------------------
+void num_bajom() {
+  Serial.println(" "); //Mensaje-Imprime un espacio la CX Serial
+  Serial.println("Numero Menor Matriz: "); //Mensaje-Imprime en la CX Serial
+  bajomatriz == matriz_num[0][0]; //Iguala la matriz origianl al de la variable
+  for (; i < 10; i++) { //Bucle para los datos de la fila matriz
+    for (; j < 3; j++) { //Bucle para los datos de la columna matriz
+      if (bajomatriz > matriz_num[i][j + 1]) //Analiza posicion por posicion
+        bajomatriz = matriz_num[i][j + 1]; //Analiza posicion por posicion
+    }
+    j = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  }
+  Serial.println(bajomatriz); //Mensaje-Imprime el bajomatriz en la CX Serial
+  bajomatriz = 0; //Inicializa de nuevo la variable para no alterar el resultado
+  i = 0; //Inicializa de nuevo la variable para no alterar el resultado
+}
