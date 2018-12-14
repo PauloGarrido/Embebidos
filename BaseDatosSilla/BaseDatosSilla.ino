@@ -1,5 +1,4 @@
 #include "reducida.h"  // archivo Base de datos 
-#include "EficienciaDatos.h"
 #include <EEPROM.h>// libreria de la EEPROM
 #include <TimerOne.h>  // libreria del TIMER
 
