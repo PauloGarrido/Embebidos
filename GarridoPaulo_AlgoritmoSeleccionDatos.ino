@@ -79,8 +79,7 @@ float knn_datos(float lim1, float lim2) {
       for (fil = 0; fil < 30; fil++) {
         for (col = 0; col < 5; col++) {
           Serial.print(matriz_nueva[fil][col]);
-          Serial.print(",");
-        }
+         }
       }
     }
     for (fil = 0; fil < 30; fil++) {
